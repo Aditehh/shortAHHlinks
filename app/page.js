@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ export default function Home() {
             Shorten
           </button>   
 
-          
+
         </div> */}
 
         {/* Features */}
@@ -43,7 +44,7 @@ export default function Home() {
 
           <div className="mt-10 ">
             <button className="cursor-pointer px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-lg font-semibold rounded-xl shadow-md hover:from-blue-700 hover:to-indigo-700 transition-transform transform hover:scale-105">
-               Try Now 
+               <Link href="/shorten" >Try Now </Link>  
             </button>
           </div>
 
