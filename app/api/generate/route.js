@@ -12,20 +12,20 @@ export async function POST(request) {
       );
     }
 
-    const client = await clientPromise;
+    const client    = await clientPromise;
     const db = client.db("shortahhlinks");
     const collection = db.collection("url");
 
     const result = await collection.insertOne({
       url: body.url,
       shortUrl: body.shortUrl,
-      createdAt: new Date(),
+    //   createdAt: new Date(),
     });
 
     return new Response(
       JSON.stringify({
         message: "URL saved successfully",
-        insertedId: result.insertedId,
+        // insertedId: result.insertedId,
       }),
       { status: 201 }
     );
