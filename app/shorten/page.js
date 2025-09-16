@@ -3,15 +3,42 @@ import React from 'react'
 import { useState } from 'react'
 
 
-const handlechange = () => {
 
-}
 
 const page = () => {
 
     const [url, seturl] = useState("")
     const [shortUrl, setshortUrl] = useState("")
     const [generated, setgenerated] = useState(false)
+
+    const shorten = () => {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "url": url,
+            "shortUrl": shortUrl
+        });
+
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+        };
+
+        fetch("/api/generate", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                seturl("")
+                setshortUrl("")
+                setgenerated(true)
+                console.log(result)
+                alert(result.message)
+            })
+            .catch((error) => console.error(error));
+    }
+
 
     return (
         <div className='min-h-[86.7vh] flex flex-col items-center justify-center bg-gray-50 px-6'>
@@ -42,7 +69,9 @@ const page = () => {
                         placeholder="Enter the URL name"
                         className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                     />
-                    <button className=" cursor-pointer px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    <button
+                        onClick={shorten}
+                        className=" cursor-pointer px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
                         Shorten
                     </button>
 
