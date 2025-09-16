@@ -1,6 +1,8 @@
 "use client"
+// import { Code } from 'mongodb'
 import React from 'react'
 import { useState } from 'react'
+import Link from 'next/link'
 
 
 
@@ -32,7 +34,7 @@ const page = () => {
             .then((result) => {
                 seturl("")
                 setshortUrl("")
-                setgenerated(`${process.env.NEXT_HOST}/${shortUrl}`)
+                setgenerated(`${process.env.NEXT_PUBLIC_HOST}/${shortUrl}`)
                 console.log(result)
                 alert(result.message)
             })
@@ -77,9 +79,11 @@ const page = () => {
 
 
                 </div>
-
             </div>
 
+            {generated && <code>
+                <Link target='_blank' href={generated}>{generated}</Link>
+            </code>}
         </div>
     )
 }
