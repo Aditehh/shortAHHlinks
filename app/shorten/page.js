@@ -9,7 +9,7 @@ const page = () => {
 
     const [url, seturl] = useState("")
     const [shortUrl, setshortUrl] = useState("")
-    const [generated, setgenerated] = useState(false)
+    const [generated, setgenerated] = useState("")
 
     const shorten = () => {
         const myHeaders = new Headers();
@@ -32,7 +32,7 @@ const page = () => {
             .then((result) => {
                 seturl("")
                 setshortUrl("")
-                setgenerated(true)
+                setgenerated(`${process.env.NEXT_HOST}/${shortUrl}`)
                 console.log(result)
                 alert(result.message)
             })
